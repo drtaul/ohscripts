@@ -1,0 +1,14 @@
+
+Number Sun_Elevation            "Sun Elevation"                 <sun>       { channel = "astro:sun:home:position#elevation" }
+Number Sun_Azimuth              "Sun Azimuth"                   <sun>       { channel = "astro:sun:home:position#azimuth" }
+DateTime Sunrise_Time           "Sunrise [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:rise#start" }
+DateTime Sunset_Time            "Sunset [%1$tH:%1$tM]"          <sunset>    { channel = "astro:sun:home:set#start" }
+Number Moon_Elevation           "Moon Elevation"                <moon>      { channel = "astro:moon:home:position#elevation" }
+Number Moon_Azimuth             "Moon Azimuth"                  <moon>      { channel = "astro:moon:home:position#azimuth" }
+
+DateTime CurrentDate  "Date [%1$tA, %1$td.%1$tm.%1$tY]"   <calendar>  { channel="ntp:ntp:taul:dateTime" }
+
+Switch LivingRoomLamp "living room lamp" ["Lighting"] { channel="exec:command:lvlamp:input"}
+String LandscapeLights "landscape lights" ["Switchable"] { channel="exec:command:lslights:input"}
+
+

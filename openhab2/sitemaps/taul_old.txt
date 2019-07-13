@@ -1,0 +1,40 @@
+sitemap taul label="Dennis and Kay's Home" {
+    Frame label="Date" {
+        Text item=CurrentDate
+    }
+    Frame label="Weather" {
+	Text item=Weather_Temperature icon="temperature" valuecolor=[>25="red",>15="green",>5="orange",<5="blue"]
+ 	Text item=Humidity icon="rain"
+ 	Text item=Pressure icon="sun_clouds"
+
+	Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="NULL"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
+            Frame {
+                Text item=Weather_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+                Text item=Weather_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+                Text item=Weather_LastUpdate visibility=[Weather_LastUpdate>30] valuecolor=[Weather_LastUpdate>120="orange", Weather_LastUpdate>300="red"]
+            }
+            Frame {
+                Switch item=Weather_Chart_Period label="Chart Period" mappings=[0="Hour", 1="Day", 2="Week"]
+                Chart item=Weather_Chart period=h refresh=600 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="NULL"]
+                Chart item=Weather_Chart period=D refresh=3600 visibility=[Weather_Chart_Period==1]
+                Chart item=Weather_Chart period=W refresh=3600 visibility=[Weather_Chart_Period==2]
+            }
+        }
+
+
+	Text label="Astronomical Data" icon="sun" {
+            Text item=Sun_Elevation
+            Text item=Sun_Azimuth
+            Text item=Sunrise_Time
+            Text item=Sunset_Time
+            Text item=Moon_Elevation
+            Text item=Moon_Azimuth
+            Text item=Moon_Phase
+        }
+
+    }
+    Frame label="Lights" {
+	Switch item=LivingRoomLamp label=”Living Room Lamp” icon=”Light” mappings= [ “ON”=”ON”, “OFF”=”OFF” ]
+	Switch item=LandscapeLights label=”Landscape Lights” icon=”Light” mappings= [ “ON”=”ON”, “OFF”=”OFF” ]
+    }
+}

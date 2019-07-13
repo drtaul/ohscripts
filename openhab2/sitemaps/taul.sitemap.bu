@@ -1,0 +1,9 @@
+sitemap taul label="Dennis and Kay's Home" {
+    Frame label="Date" {
+        Text item=CurrentDate
+    }
+    Frame label="Lights" {
+        Switch item=LivingRoomLamp label="Living Room Lamp" icon="light" 
+        Switch item=LandscapeLights label="Landscape Lights" icon="light"
+    }
+}

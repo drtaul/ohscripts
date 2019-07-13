@@ -1,0 +1,36 @@
+//DateTime Sunrise_Time           "Sunrise [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:rise#start" }
+//DateTime Sunset_Time            "Sunset [%1$tH:%1$tM]"          <sunset>    { channel = "astro:sun:home:set#start" }
+
+
+DateTime CurrentDate  "Date [%1$tA, %1$td.%1$tm.%1$tY]"   <calendar>  { channel="ntp:ntp:taul:dateTime" }
+
+Group    Home               "Home"          <house>                               ["Building"]
+
+Group    FF                 "First Floor"   <firstfloor>   (Home)                 ["FirstFloor"]
+
+Group    OU                 "Out Doors"     <garden>       (Home)                 ["Outside"]
+
+Group    LivingRoom         "Living Room"   <sofa>         (Home)                 ["LivingRoom"]
+
+Group    Kit                "Kitchen"   <kitchen>         (Home)                 ["Kitchen"]
+
+Switch   LivingRoomLamp   "living room lamp"    <light>        (LivingRoom, gLight)   ["Lighting", "Switchable"]  
+
+Switch   DrivewayLights   "driveway lights"    <light>        (OU, gLight)   ["Lighting", "Switchable"]  
+
+Switch   KitchenLight     "kitchen light"    <light>        (Kit, gLight)   ["Lighting", "Switchable"]  
+
+Group:Switch:OR(ON, OFF)   gLight   "lights"   <light>   (Home)   ["Lighting", "Switchable"]
+
+Switch lvlampe {channel="exec:command:lvlamp:run"}
+String lvlampe_Args {channel="exec:command:lvlamp:input"}
+String lvlampe_out {channel="exec:command:lvlamp:output"}
+
+Switch setrelaye {channel="exec:command:setrelay:run"}
+String setrelaye_Args {channel="exec:command:setrelay:input"}
+String setrelaye_out {channel="exec:command:setrelay:output"}
+
+// Switch Shelly201MQTT “Kitshelly”  {mqtt=">[mosquitto:shellies/shelly1-553D31/relay/0/command:command:ON:1],>[mosquitto:shellies/shelly1-553D31/relay/0/command:command:OFF:0],<[mosquitto:shellies/shelly1-553D31/relay/0:state:default]"}
+
+Switch ShKitWsMQTT "Kit Wall Sw" <light> {channel="mqtt:topic:60acfd0a:power1"}
+

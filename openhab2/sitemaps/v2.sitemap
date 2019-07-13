@@ -1,0 +1,16 @@
+sitemap taul label="Dennis and Kay's Home" {
+
+    Frame label="Date" {
+	Text item=CurrentDate
+    }
+
+    Frame {
+        Group item=LivingRoom
+    }
+
+    Frame {
+        Text label="Light" icon="light" {
+            Default item=LivingRoomLamp label="Living Room Lamp"
+        }
+    }
+}

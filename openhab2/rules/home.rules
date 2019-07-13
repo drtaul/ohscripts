@@ -1,0 +1,64 @@
+rule "Kitchen Light"
+when
+    Item KitchenLight received command 
+then
+    if(receivedCommand == ON) {
+        sendCommand(ShKitWsMQTT, ON)
+    } else {
+        sendCommand(ShKitWsMQTT, OFF)
+    }
+
+end
+
+rule "TPLink Smart Outlets"
+when
+    Item LivingRoomLamp received command
+then
+    if(receivedCommand == ON) {
+        lvlampe_Args.sendCommand("100")
+    } else {
+        lvlampe_Args.sendCommand("0")
+    }
+    while(lvlampe.state == ON) {
+        Thread::sleep(500)
+        logInfo("cmd lvlamp", " state: " + lvlampe.state)
+    }
+
+    lvlampe.sendCommand(ON)
+end
+
+rule "Relay Card"
+when
+    Item DrivewayLights received command
+then
+    if(receivedCommand == ON) {
+        setrelaye_Args.sendCommand("lslights on")
+    } else {
+        setrelaye_Args.sendCommand("lslights off")
+    }
+    while(setrelaye.state == ON) {
+        Thread::sleep(500)
+        logInfo("cmd setrelay", " state: " + setrelaye.state)
+    }
+
+    setrelaye.sendCommand(ON)
+end
+
+
+rule "Midnight actions"
+when
+    Channel 'astro:sun:home:morningNight#event' triggered START
+then
+    sendCommand(DrivewayLights, OFF)
+end
+
+rule "Sunset actions"
+when
+    Channel 'astro:sun:home:set#event' triggered START
+then
+    sendCommand(DrivewayLights, ON)
+end
+
+
+// vim: syntax=Xtend syntax=openhab
+

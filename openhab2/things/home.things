@@ -1,0 +1,12 @@
+yahooweather:weather:apex [ location=23509763 ]
+ntp:ntp:taul [ ntpServer="us.pool.ntp.org", refreshInterval=60, refreshNtp=30 ]
+// Thing exec:command:lslights [ command="/etc/openhab2/scripts/setrelay.py lslights %2$s", transform="REGEX((.*?))", interval=0, timeout=5, autorun=true]
+Thing exec:command:setrelay [ command="/etc/openhab2/scripts/setrelay.py %2$s", interval=0, timeout=5, autorun=true]
+
+// Bridge mqtt:broker:mosquitto "Mosquitto" [ host="localhost", port=1883, secure=false, clientID="openHAB2" ]
+//{
+//    Thing topic KitShelly1 "KitWsShelly1" @ "Kitchen" {
+//                Channels:
+//                Type switch : power "Power" [ stateTopic="shellies/shelly1-553D31/relay/0", on="on", off="off", commandTopic="shellies/shelly1-553D31/relay/0/command", on="on", off="off" ] 
+//        }
+//}

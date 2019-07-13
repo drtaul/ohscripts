@@ -1,0 +1,26 @@
+sitemap home label="102 Hibiscus Court" {
+
+    Frame label="Date" {
+	Text item=CurrentDate
+    }
+
+    Frame {
+        Group item=LivingRoom
+    }
+
+    Frame {
+        Group item=OU
+    }
+
+    Frame {
+        Group item=Kit
+    }
+
+    Frame {
+        Text label="Light" icon="light" {
+            Default item=LivingRoomLamp label="Living Room Lamp"
+            Default item=DrivewayLights label="Landscape Lights"
+            Default item=KitchenLight label="Kitchen Light"
+        }
+    }
+}
